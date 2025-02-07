@@ -23,7 +23,7 @@ jobs:
         run: docker compose up -d
 
       - name: Accept Host Key
-        run:
+        run: |
           mkdir -p ~/.ssh
           ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
           chmod 700 ~/.ssh
