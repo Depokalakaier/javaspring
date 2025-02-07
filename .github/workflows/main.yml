@@ -1,0 +1,23 @@
+name: Build and Deploy
+on:
+  push: 
+    branches:
+    - main
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps: 
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Checkout JDK 17
+        uses: actions/setup-java@vs
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Build Maven
+        run: mvn clean package --file pom.xml              
+      - name: Run Docker Compose
+        run: docker dompose up -d
