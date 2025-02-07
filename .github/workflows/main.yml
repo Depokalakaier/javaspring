@@ -28,7 +28,7 @@ jobs:
           ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/
           known_hosts
           chmod 700 ~/.ssh
-          shmod 644 ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
 
       - name: Remote SSH
         uses: appleboy/ssh-action@v1.2.0
