@@ -41,7 +41,7 @@ jobs:
             ls -lah
             cd projekt1
             git clone git@github.com:Depokalakaier/javaspring.git
-            cd javaspring.git
+            cd javaspring
             git pull origin main
             mvn clean package
             docker build --rm -t spring-mongodb-image .
