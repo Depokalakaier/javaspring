@@ -21,3 +21,30 @@ jobs:
         run: mvn clean package --file pom.xml
       - name: Run Docker Compose
         run: docker compose up -d
+
+      - name: Accept Host Key
+        run:
+          mkdir -p ~/.ssh
+          ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/
+          known_hosts
+          chmod 700 ~/.ssh
+          shmod 644 ~/.ssh/known_hosts
+
+      - name: Remote SSH
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{secrets.PASSWORD}}
+          port: ${{ secrets.PORT }}
+          script:
+            ls -lah
+            cd projekt1
+            git clone git@github.com:Depokalakaier/javaspring.git
+            cd javaspring.git
+            git pull origin main
+            mvn clean package
+            docker build --rm -t spring-mongodb-image .
+            docker compose up -d --build
+
+
