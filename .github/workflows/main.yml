@@ -34,9 +34,9 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
-          password: ${{secrets.PASSWORD}}
-          port: ${{ secrets.PORT }}
-          script:
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }} 
+          script: |
             ls -lah
             cd projekt1
             git clone git@github.com:Depokalakaier/javaspring.git
